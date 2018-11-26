@@ -13,6 +13,8 @@
 @interface HomeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *firstTextView;
 @property (weak, nonatomic) IBOutlet UITextView *secondTextView;
+@property (weak, nonatomic) IBOutlet UILabel *fLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sLabel;
 
 @end
 
@@ -45,6 +47,8 @@
     NSArray *sArray = [_secondTextView.text componentsSeparatedByString:@"\n"];
     NSMutableArray *resArray = [NSMutableArray array];
     if (fArray.count == sArray.count) {
+        self.fLabel.hidden = YES;
+        self.sLabel.hidden = YES;
         for (NSInteger i = 0; i < fArray.count; i++) {
             NSMutableString *mf = [NSMutableString stringWithString:fArray[i]];
             NSString *f;
@@ -61,7 +65,11 @@
         vc.result = resStr;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        [SVProgressHUD showErrorWithStatus:@"转换数量不一致"];
+        self.fLabel.hidden = NO;
+        self.sLabel.hidden = NO;
+        self.fLabel.text = [NSString stringWithFormat:@"%lu count",(unsigned long)fArray.count];
+        self.sLabel.text = [NSString stringWithFormat:@"%lu count",(unsigned long)sArray.count];
+        [SVProgressHUD showErrorWithStatus:@"count different!"];
         [SVProgressHUD dismissWithDelay:1.5];
     }
 }

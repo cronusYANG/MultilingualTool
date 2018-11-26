@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Result";
-    [self.resTextView setUserInteractionEnabled:NO];
+    [self.resTextView setEditable:NO];
     self.resTextView.text = self.result;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Copy All" style:UIBarButtonItemStylePlain target:self action:@selector(copyAllData)];
@@ -28,7 +28,7 @@
     
     UIPasteboard *pBoard = [UIPasteboard generalPasteboard];
     pBoard.string = self.result;
-    [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+    [SVProgressHUD showSuccessWithStatus:@"successful copy"];
     [SVProgressHUD dismissWithDelay:1.5];
 }
 
